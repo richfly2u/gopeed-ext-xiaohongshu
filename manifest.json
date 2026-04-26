@@ -23,7 +23,7 @@
       "name": "headless",
       "title": "無頭模式 (Headless)",
       "description": "隱藏瀏覽器視窗（需先在顯示模式下登入過一次，Cookie 才有效）",
-      "type": "bool",
+      "type": "boolean",
       "value": false
     },
     {
