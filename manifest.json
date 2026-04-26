@@ -5,6 +5,7 @@
   "description": "解析並下載小紅書 (RedNote / XHS) 影片與圖集，支援最高畫質選擇",
   "version": "1.0.0",
   "homepage": "https://github.com",
+  "icon": "icon.png",
   "scripts": [
     {
       "event": "onResolve",
