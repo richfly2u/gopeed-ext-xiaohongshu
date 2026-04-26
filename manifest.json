@@ -1,0 +1,41 @@
+{
+  "name": "gopeed-ext-xiaohongshu",
+  "author": "custom",
+  "title": "小紅書影片下載",
+  "description": "解析並下載小紅書 (RedNote / XHS) 影片與圖集，支援最高畫質選擇",
+  "version": "1.0.0",
+  "homepage": "https://github.com",
+  "scripts": [
+    {
+      "event": "onResolve",
+      "match": {
+        "urls": [
+          "*://www.xiaohongshu.com/explore/*",
+          "*://www.xiaohongshu.com/discovery/item/*",
+          "*://xhslink.com/*"
+        ]
+      },
+      "entry": "index.js"
+    }
+  ],
+  "settings": [
+    {
+      "name": "headless",
+      "title": "無頭模式 (Headless)",
+      "description": "隱藏瀏覽器視窗（需先在顯示模式下登入過一次，Cookie 才有效）",
+      "type": "bool",
+      "value": false
+    },
+    {
+      "name": "prefer_format",
+      "title": "偏好視訊格式",
+      "description": "優先嘗試的串流格式：h265 畫質較好但相容性較低，h264 最相容",
+      "type": "string",
+      "value": "h264",
+      "options": [
+        { "label": "H.264 (最相容)", "value": "h264" },
+        { "label": "H.265 (較高畫質)", "value": "h265" }
+      ]
+    }
+  ]
+}
