@@ -3,7 +3,7 @@
   "author": "custom",
   "title": "小紅書影片下載",
   "description": "解析並下載小紅書 (RedNote / XHS) 影片與圖集，支援最高畫質選擇",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "homepage": "https://github.com",
   "icon": "icon.png",
   "scripts": [
