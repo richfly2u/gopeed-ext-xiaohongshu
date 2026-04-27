@@ -7,11 +7,16 @@ const DEFAULT_UA =
 
 // 將標題中不合法的檔名字元替換掉
 function sanitizeFilename(name) {
-  return (name || "xhs_media")
+  var cleaned = (name || "xhs_media")
     .replace(/[<>:"/\\|?*\x00-\x1f]/g, "_")
     .replace(/\s+/g, " ")
-    .trim()
-    .substring(0, 100);
+    .trim();
+  // 裁切時保留副檔名
+  var dotIdx = cleaned.lastIndexOf(".");
+  if (dotIdx !== -1 && cleaned.length > 100) {
+    return cleaned.substring(0, 100 - (cleaned.length - dotIdx)) + cleaned.substring(dotIdx);
+  }
+  return cleaned.substring(0, 100);
 }
 
 // 在 webview 頁面內執行，等待 __INITIAL_STATE__ 並提取媒體資訊
@@ -111,7 +116,12 @@ function extractMediaFromPage(preferFormat) {
             img.url;
           if (imgUrl) {
             var pad = String(i + 1).padStart(2, "0");
-            images.push({ name: title + "_" + pad + ".jpg", url: imgUrl });
+            // 從 URL 判斷副檔名，小紅書 CDN 網址通常無副檔名
+            var ext = ".jpg";
+            if (imgUrl.indexOf("webp") !== -1) ext = ".webp";
+            else if (imgUrl.indexOf(".png") !== -1) ext = ".png";
+            else if (imgUrl.indexOf(".gif") !== -1) ext = ".gif";
+            images.push({ name: title + "_" + pad + ext, url: imgUrl });
           }
         }
         if (images.length > 0) {
